@@ -1,0 +1,1590 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: "Folio"
+  description: API for the Folio Digital Learning Environment. It contains 5 sections. Campus, Course, Competency, Assessment, Event.
+  license:
+    name: MIT
+    url: https://github.com/3iPunt/FolioAPI/blob/master/LICENSE
+host: foliolms.apiblueprint.org
+basePath: /
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+  - name: "Campus"
+    description: "The community and the online offerings of university"
+  - name: "Program"
+    description: "Academic programs comprise the core, required and elective courses that lead to a degree or certificate"
+  - name: "Course"
+    description: "A Course is a well defined space inside UOC Campus where learning happens"
+  - name: "Course Plan"
+    description: "Where the Course is defined"
+  - name: "Competency"
+    description: "Competences and dimensions of the competences"
+  - name: "Activity"
+    description: "Some type of courses are based on activities. An Activity is a time restricted, assessable amount of work the student has to do in order to succeed in the Course"
+  - name: "Participants"
+    description: "Participants of the Course"
+  - name: "Resource"
+    description: "A resource is a piece of content"
+  - name: "ResourceFolder"
+    description: "A resource folder set of resourcess"
+  - name: "Tool"
+    description: "A Tool is an external item that can be integrated in the Course, providing a service for performing an activity"
+  - name: "Activity Content"
+    description: "Refers to the content of an Activity (sections, assignment, etc)"
+  - name: "Assessment"
+    description: "Assessment refers to how is graded an activity and the whole course"
+  - name: "Event"
+    description: "An Event is range of time associated with a Location and event sponsors. Used here to manage notifications and calendars"
+parameters:
+  facultyId:
+    name: facultyId
+    in: path
+    description: "ID of the Faculty"
+    required: true
+    type: "string"
+  programId:
+    name: programId
+    in: path
+    description: "ID of the Program"
+    required: true
+    type: "string"
+  userName:
+    name: userName
+    in: path
+    description: "ID of the User"
+    required: true
+    type: "string"
+  searchString:
+    name: searchString
+    in: path
+    description: "user search string"
+    required: true
+    type: "string"
+  subjectId:
+    name: subjectId
+    in: path
+    description: "ID of the course"
+    required: true
+    type: "string"
+  courseOfferingId:
+    name: courseOfferingId
+    in: path
+    description: "ID of the course"
+    required: true
+    type: "string"
+  courseId:
+    name: courseId
+    in: path
+    description: "ID of the course"
+    required: true
+    type: "string"
+  activityId:
+    name: activityId
+    in: path
+    description: "ID of the activity"
+    required: true
+    type: "string"
+  participantId:
+    name: participantId
+    in: path
+    description: "ID of the participant"
+    required: true
+    type: "string"
+  eventBoardId:
+    name: eventBoardId
+    in: path
+    description: "ID of the board"
+    required: true
+    type: "string"
+  eventBoardStartDate:
+    name: eventBoardStartDate
+    in: path
+    description: "start date to list board events"
+    required: true
+    type: "string"
+  eventBoardEndDate:
+    name: eventBoardEndDate
+    in: path
+    description: "end date to list board event"
+    required: true
+    type: "string"  
+  eventId:
+    name: eventId
+    in: path
+    description: "ID of the event"
+    required: true
+    type: "string"
+definitions:
+  Faculty:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The Faculty identifier
+        example: 'mc3.learning.faculty:EIMT@uoc.edu'
+      institutionId:
+        type: string
+        description: The institution Id.
+        example: 'mc3.learning.instituion.UOC'
+      displayName:
+        type: string
+        description: The Faculty title
+        example: Estudis d'informàtica, Multimèdia i Telecomunicacions
+  Program:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The program identifier
+        example: 'mc3.learning.program:602644@uoc.edu'
+      facultyId:
+        type: string
+        description: The faculty Id of the program.
+        example: 'mc3.learning.faculty.EIMT@uoc.edu'
+      displayName:
+        type: string
+        description: The Program title
+        example: Enginyeria en Informàtica
+  Course:
+    type: object
+    properties:
+      title:
+        type: string
+        description: The Course title
+        example: Aula proves projectes 1
+      id:
+        type: string
+        description: The Course identifier
+        example: 'mc3.learning.course:602644@uoc.edu'
+      code:
+        type: string
+        description: The Course code
+        example: 'uoc_181_01_500_01'
+      subject_id:
+        type: string
+        description: The identifier of the Subject of the Course
+        example: 'mc3.learning.subject:602643@uoc.edu'
+      type:
+        type: string
+        description: The Course type. It defines several aspects of the course, such layout.
+        example: 'mc3.learning.course.pacbased'
+  Competence:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The Competence identifier
+        example: 'mc3.learning.competency.general:602644@uoc.edu'
+      type:
+        type: string
+        description: The Competence type.
+        example: 'mc3.learning.competency.general'
+      displayName:
+        type: string
+        description: The Competence title
+        example: Treball en grup
+      description:
+        type: string
+        description: The Competence description
+        example: Capacitat per treballar en grup
+  Activity:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The Activity identifier
+        example: 'mc3.learning.pac:602644@uoc.edu'
+      type:
+        type: string
+        description: The Activity type.
+        example: 'mc3.learning.pac.assessed'
+      displayName:
+        type: string
+        description: The Activity title
+        example: Activitat Avaluable 1
+  User:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The user identifier
+        example: 'mc3.agent:130360@uoc.edu'
+      userName:
+        type: string
+        description: the user name Id
+        example: 'johndoe'
+      type:
+        type: string
+        description: The user type
+        example: 'mc3.agent'
+      displayName:
+        type: string
+        description: The user name
+        example: John Doe
+      FirstName:
+        type: string
+        description: The user first name
+        example: John
+      FamilyName1:
+        type: string
+        description: The Family name
+        example: Doe
+      FamilyName2:
+        type: string
+        description: The second family name
+  ProfileItem:
+    type: object
+    properties:
+      key:
+        type: string
+        description: The user profile key
+        example: linkedin
+      value:
+        type: string
+        description: The user profile value
+        example: https://es.linkedin.com/in/john-Doe  
+  UserProfile:
+    type: array
+    items:
+      $ref: "#/definitions/ProfileItem"
+  Participant:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The participant identifier
+        example: 'mc3.agent:130360@uoc.edu'
+      type:
+        type: string
+        description: The participant type
+        example: 'mc3.agent'
+      displayName:
+        type: string
+        description: The Participant name
+        example: John Doe
+  CourseGrade:
+    type: object
+    properties:
+      courseId:
+        type: string
+        description: "ID of the course"
+        example: 'mc3.learning.course:602644@uoc.edu'
+      participantId:
+        type: string
+        description: The participant identifier
+        example: 'mc3.agent:130360@uoc.edu'
+      grade:
+        type: string
+        description: Grade of the participant in the course
+        example: A
+  ActivityGrade:
+    type: object
+    properties:
+      courseId:
+        type: string
+        description: The Activity identifier
+        example: 'mc3.learning.pac:602644@uoc.edu'
+      participantId:
+        type: string
+        description: The participant identifier
+        example: 'mc3.agent:130360@uoc.edu'
+      grade:
+        type: string
+        description: Grade of the participant in the course
+        example: A
+  CompetenceArray:
+    type: array
+    items:
+      $ref: "#/definitions/Competence"
+  ActivityArray:
+    type: array
+    items:
+      $ref: "#/definitions/Activity"
+  ProgramArray:
+    type: array
+    items:
+      $ref: "#/definitions/Program"
+  UserArray:
+    type: array
+    items:
+      $ref: "#/definitions/User"
+  ParticipantArray:
+    type: array
+    items:
+      $ref: "#/definitions/Participant"
+  CourseGradeArray:
+    type: array
+    items:
+      $ref: "#/definitions/CourseGrade"
+  ParticipantGradeArray:
+    type: array
+    items:
+      $ref: "#/definitions/CourseGrade"
+  ParticipantActivityGradeArray:
+    type: array
+    items:
+      $ref: "#/definitions/ActivityGrade"
+  Error:
+    type: object
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+    required:
+      - code
+      - message
+  EventBoard:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The event board Id
+        example: 'mc3.learning.eventBoard:XXXX'
+      displayName:
+        type: string
+        description: The Event Board name
+        example: 'Course XXX design process'    
+  EventBoardArray:
+    type: array
+    items:
+      $ref: "#/definitions/EventBoard"
+  Event:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The event board Id
+        example: 'mc3.learning.eventBoard:XXXX'
+      displayName:
+        type: string
+        description: The Event Board name
+        example: Course XXX design process
+  EventArray:
+    type: array
+    items:
+      $ref: "#/definitions/Event"  
+responses:
+  NotFound:
+    description: The specified resource (or one of its parent resources) was not found
+    schema:
+      $ref: '#/definitions/Error'
+  Unauthorized:
+    description: Unauthorized
+    schema:
+      $ref: '#/definitions/Error'
+  BadRequest:
+    description: Bad request parameters
+    schema:
+      $ref: '#/definitions/Error'
+  Error:
+    description: Unexpected Error
+    schema:
+      $ref: '#/definitions/Error'
+paths:
+  /faculties:
+    get:
+      summary: List my faculties (most common is one)
+      tags:
+        - "Campus"
+      responses:
+        200:
+          description: 'List of all faculties involved'
+          examples:
+            application/json:
+              - title: "Estudis d'Informàtica Multimèdia i Telecomunicacions (EIMT)"
+                id: 602644
+                code: 'uoc_EIMT'
+                faculty_id: 602643
+        401:
+          $ref: '#/responses/Unauthorized'
+        default:
+          $ref: '#/responses/Error'
+  /faculties/{facultyId}:
+    get:
+      summary: Get a faculty
+      tags:
+        - "Campus"
+        - "Program"
+      parameters:
+        - $ref: '#/parameters/facultyId'
+      responses:
+        200:
+          description: 'a Faculty object with the Faculty data'
+          schema:
+            $ref: "#/definitions/Faculty"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+         $ref: '#/responses/Error'
+  /faculties/{facultyId}/competences:
+    get:
+      summary: Get the competences of a faculty
+      tags:
+        - "Campus"
+        - "Program"
+      parameters:
+        - $ref: '#/parameters/facultyId'
+      responses:
+        200:
+          description: 'Array of Competences with the competences of the Faculty'
+          schema:
+            $ref: "#/definitions/CompetenceArray"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+         $ref: '#/responses/Error'
+  /faculties/{facultyId}/programs:
+    get:
+      summary: Gets the list of programs of the Faculty
+      tags:
+        - "Campus"
+        - "Program"
+      parameters:
+        - $ref: '#/parameters/facultyId'
+      responses:
+        200:
+          description: 'Array of Program with the programs of the Faculty'
+          schema:
+            $ref: "#/definitions/ProgramArray"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+  /faculties/{facultyId}/programs/{programId}:
+    get:
+      summary: Get a program
+      tags:
+        - "Campus"
+        - "Program"
+      parameters:
+        - $ref: '#/parameters/facultyId'
+        - $ref: '#/parameters/programId'
+      responses:
+        200:
+          description: 'a Program object with the Program data'
+          schema:
+            $ref: "#/definitions/Program"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+         $ref: '#/responses/Error'
+  /faculties/{facultyId}/programs/{programId}/competences:
+    get:
+      summary: Get the competences of a programs
+      tags:
+        - "Campus"
+        - "Program"
+      parameters:
+        - $ref: '#/parameters/facultyId'
+        - $ref: '#/parameters/programId'
+      responses:
+        200:
+          description: 'Array of Competences with the competences of the Program'
+          schema:
+            $ref: "#/definitions/CompetenceArray"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+         $ref: '#/responses/Error'
+  /faculties/{facultyId}/programs/{programId}/subjects:
+    get:
+      summary: Gets the list of canonical courses of the program
+      tags:
+        - "Campus"
+        - "Program"
+      parameters:
+        - $ref: '#/parameters/facultyId'
+        - $ref: '#/parameters/programId'
+      responses:
+        200:
+          description: 'List of all courses of the program'
+          examples:
+            application/json:
+              - title: "Aula proves projectes 1"
+                id: 602644
+                code: 'uoc_181_01_500_01'
+                subject_id: 602643
+                credits: 6
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'       
+  /programs:
+    get:
+      summary: List my programs
+      tags:
+        - "Campus"
+        - "Program"
+      responses:
+        200:
+          description: 'List of all assigned programs'
+          schema:
+            $ref: "#/definitions/ProgramArray"
+        401:
+          $ref: '#/responses/Unauthorized'
+        default:
+          $ref: '#/responses/Error'
+  /programs/{programId}/roles:
+    get:
+      summary: Gets the list of user roles in the program
+      tags:
+        - "Campus"
+        - "Program"
+      parameters:
+        - $ref: '#/parameters/programId'
+      responses:
+        200:
+          description: 'List of all user roles in the program'
+          examples:
+            application/json:
+              - role: "Professor"
+                id: 602644
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'       
+  /users/{userName}:
+    get:
+      summary: Get the DLE user
+      tags:
+        - "Campus"
+        - "User"
+      parameters:
+        - $ref: '#/parameters/userName'
+      responses:
+        200:
+          description: 'a Digital Learning Environment user'
+          schema:
+            $ref: "#/definitions/User"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+         $ref: '#/responses/Error'
+  /users/{userName}/profile:
+    get:
+      summary: Get the DLE user
+      tags:
+        - "Campus"
+        - "User"
+      parameters:
+        - $ref: '#/parameters/userName'
+      responses:
+        200:
+          description: 'a Digital Learning Environment user'
+          schema:
+            $ref: "#/definitions/UserProfile"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+         $ref: '#/responses/Error'
+  /users/{searchString}:
+    get:
+      summary: Gets the list of users that match with the search
+      tags:
+        - "Campus"
+        - "user"
+      parameters:
+        - $ref: '#/parameters/searchString'
+      responses:
+        200:
+          description: 'Array of users that match with the search'
+          schema:
+            $ref: "#/definitions/UserArray"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'       
+  /courses:
+    get:
+      summary: List my courses
+      tags:
+        - "Campus"
+        - "Program"
+        - "Course"
+      responses:
+        200:
+          description: 'List of all assigned courses'
+          examples:
+            application/json:
+              - title: "Aula proves projectes 1"
+                id: 602644
+                code: 'uoc_181_01_500_01'
+                subject_id: 602643
+        401:
+          $ref: '#/responses/Unauthorized'
+        default:
+          $ref: '#/responses/Error'
+    post:
+      summary: Creates a new course in the system
+      tags:
+        - "Campus"
+        - "Program"
+        - "Course"
+      parameters:
+        - in: body
+          name: course
+          description: The new course
+          schema:
+            $ref: "#/definitions/Course"
+      responses:
+        200:
+          description: 'The course has been created'
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+  /courses/{courseId}:
+    get:
+      summary: Get a course
+      tags:
+        - "Course"
+      parameters:
+        - $ref: '#/parameters/courseId'
+      responses:
+        200:
+          description: 'a Course object with the course'
+          schema:
+            $ref: "#/definitions/Course"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+         $ref: '#/responses/Error'
+    put:
+      summary: Updates a course
+      tags:
+        - "Campus"
+      consumes:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/courseId'
+        - in: body
+          name: course
+          description: The updated course
+          schema:
+            $ref: "#/definitions/Course"
+      responses:
+        200:
+          description: 'Updated course object'
+          schema:
+            $ref: "#/definitions/Course"
+        400:
+          $ref: '#/responses/BadRequest'
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+  /subjects/{courseId}/activities:
+    get:
+      summary: Gets the list of activities of the Course
+      tags:
+        - "Course"
+        - "Activity"
+      parameters:
+        - $ref: '#/parameters/courseId'
+      responses:
+        200:
+          description: 'Array of Activity with the activities of the course'
+          schema:
+            $ref: "#/definitions/ActivityArray"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+    post:
+      summary: Creates an activity inside the Course
+      tags:
+        - "Course"
+        - "Activity"
+      consumes:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/courseId'
+        - in: body
+          name: activity
+          description: The new activity
+          schema:
+            $ref: "#/definitions/Activity"
+      responses:
+        200:
+          description: 'Activity object'
+          schema:
+            $ref: "#/definitions/Activity"
+        400:
+          $ref: '#/responses/BadRequest'
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+  /subjects/{courseId}/activities/{activityId}:
+    get:
+      summary: Get one activity of the Course
+      tags:
+        - "Course"
+        - "Activity"
+      parameters:
+        - $ref: '#/parameters/courseId'
+        - $ref: '#/parameters/activityId'
+      responses:
+        200:
+          description: 'Activity object'
+          schema:
+            $ref: "#/definitions/Activity"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+    put:
+      summary: Updates an activity
+      tags:
+        - "Course"
+        - "Activity"
+      consumes:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/courseId'
+        - $ref: '#/parameters/activityId'
+        - in: body
+          name: activity
+          description: The updated activity
+          schema:
+            $ref: "#/definitions/Activity"
+      responses:
+        200:
+          description: 'Updated activity object'
+          schema:
+            $ref: "#/definitions/Activity"
+        400:
+          $ref: '#/responses/BadRequest'
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+  /courses/{courseId}/participants:
+    get:
+      summary: Get the participants of the course
+      tags:
+        - "Course"
+        - "Participants"
+      parameters:
+        - $ref: '#/parameters/courseId'
+      responses:
+        200:
+          description: 'Array of Participant with the participants of the course'
+          schema:
+            $ref: "#/definitions/ParticipantArray"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+    post:
+      summary: Add new participant to the course
+      tags:
+        - "Course"
+        - "Participants"
+      parameters:
+        - $ref: '#/parameters/courseId'
+        - in: body
+          name: assignment
+          description: The assignment info about the participant to add
+          schema:
+            type: object
+            properties:
+              participantId:
+                type: string
+                description: The participant id to add
+                example: 'mc3.agent:130360@uoc.edu'
+              as:
+                type: string
+                description: The type of assignment the participant will be added to the Course
+                example: 'mc3.participant.student'
+      responses:
+        200:
+          description: 'The participant has been added to the course'
+        400:
+          $ref: '#/responses/BadRequest'
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+  /courses/{courseId}/participants/{participantId}:
+    delete:
+      summary: Removes a participant from the course
+      tags:
+        - "Course"
+        - "Participants"
+      parameters:
+        - $ref: '#/parameters/courseId'
+        - $ref: '#/parameters/participantId'
+      responses:
+        200:
+          description: 'The participant was removed from the course plan'
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+  /courses/{courseOfferingId}/students:
+    get:
+      summary: Get the students of the course.
+      tags:
+        - "Course"
+        - "Participants"
+      parameters:
+        - $ref: '#/parameters/courseOfferingId'
+      responses:
+        200:
+          description: 'Array of Participant with the participants of the course assigned to it as `mc3.participant.student`'
+          schema:
+            $ref: "#/definitions/ParticipantArray"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+    post:
+      summary: Add a new student to the course
+      tags:
+        - "Course"
+        - "Participants"
+      parameters:
+        - $ref: '#/parameters/courseOfferingId'
+        - in: body
+          name: participant id
+          description: The participant id to add
+          schema:
+            type: string
+            example: 'mc3.agent:130360@uoc.edu'
+      responses:
+        200:
+          description: 'The student has been added to the course'
+        400:
+          $ref: '#/responses/BadRequest'
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+  /courses/{courseOfferingId}/students/{participantId}:
+    delete:
+      summary: Removes a student from the course
+      tags:
+        - "Course"
+        - "Participants"
+      parameters:
+        - $ref: '#/parameters/courseOfferingId'
+        - $ref: '#/parameters/participantId'
+      responses:
+        200:
+          description: 'The student was removed from the course plan'
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+  /subjects/{courseId}/coordinators:
+    get:
+      summary: Get the teachers of the course.
+      tags:
+        - "Course"
+        - "Participants"
+      parameters:
+        - $ref: '#/parameters/courseId'
+      responses:
+        200:
+          description: 'Array of Participant with the participants of the course assigned to it as `mc3.participant.teacher`'
+          schema:
+            $ref: "#/definitions/ParticipantArray"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+    post:
+      summary: Add a teacher to the course
+      tags:
+        - "Course"
+        - "Participants"
+      parameters:
+        - $ref: '#/parameters/courseId'
+        - in: body
+          name: participant id
+          description: The participant id to add
+          schema:
+            type: string
+            example: 'mc3.agent:130360@uoc.edu'
+      responses:
+        200:
+          description: 'The teacher has been added to the course'
+        400:
+          $ref: '#/responses/BadRequest'
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+  /subjects/{courseId}/coordinators/{participantId}:
+    delete:
+      summary: Removes a teacher from the course
+      tags:
+        - "Course"
+        - "Participants"
+      parameters:
+        - $ref: '#/parameters/courseId'
+        - $ref: '#/parameters/participantId'
+      responses:
+        200:
+          description: 'The teacher was removed from the course plan'
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+  /courses/{courseOfferingId}/instructors:
+    get:
+      summary: Get the instructors of the course.
+      tags:
+        - "Course"
+        - "Participants"
+      parameters:
+        - $ref: '#/parameters/courseOfferingId'
+      responses:
+        200:
+          description: 'Array of Participant with the instructors of the course assigned to it as `mc3.participant.instructor`'
+          schema:
+            $ref: "#/definitions/ParticipantArray"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+    post:
+      summary: Add a instructor to the course
+      tags:
+        - "Course"
+        - "Participants"
+      parameters:
+        - $ref: '#/parameters/courseOfferingId'
+        - in: body
+          name: participant id
+          description: The participant id to add
+          schema:
+            type: string
+            example: 'mc3.agent:130360@uoc.edu'
+      responses:
+        200:
+          description: 'The instructor has been added to the course'
+        400:
+          $ref: '#/responses/BadRequest'
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+  /courses/{courseOfferingId}/instructors/{participantId}:
+    delete:
+      summary: Removes a instructor from the course
+      tags:
+        - "Course"
+        - "Participants"
+      parameters:
+        - $ref: '#/parameters/courseOfferingId'
+        - $ref: '#/parameters/participantId'
+      responses:
+        200:
+          description: 'The instructor was removed from the course plan'
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+  /courses/{courseId}/staff:
+    get:
+      summary: Get the staff members of the course.
+      tags:
+        - "Course"
+        - "Participants"
+      parameters:
+        - $ref: '#/parameters/courseId'
+      responses:
+        200:
+          description: 'Array of Participant with the participants of the course assigned to it as `mc3.participant.staff`'
+          schema:
+            $ref: "#/definitions/ParticipantArray"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+    post:
+      summary: Add a new staff to the course
+      tags:
+        - "Course"
+        - "Participants"
+      parameters:
+        - $ref: '#/parameters/courseId'
+        - in: body
+          name: participant id
+          description: The participant id to add
+          schema:
+            type: string
+            example: 'mc3.agent:130360@uoc.edu'
+      responses:
+        200:
+          description: 'The staff has been added to the course'
+        400:
+          $ref: '#/responses/BadRequest'
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+  /courses/{courseId}/staff/{participantId}:
+    delete:
+      summary: Removes a staff member from the course
+      tags:
+        - "Course"
+        - "Participants"
+      parameters:
+        - $ref: '#/parameters/courseId'
+        - $ref: '#/parameters/participantId'
+      responses:
+        200:
+          description: 'The staff member was removed from the course plan'
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+
+  /competences:
+    get:
+      summary: List my competences
+      tags:
+        - "Competency"
+      responses:
+        200:
+          description: 'List of all assigned competences'
+          examples:
+            application/json:
+              - title: "Adminstriació d'Empreses"
+                id: 602644
+                code: 'uoc_01'
+                program_id: 602643
+        401:
+          $ref: '#/responses/Unauthorized'
+        default:
+          $ref: '#/responses/Error'
+  /subjects/{courseId}/competences:
+    get:
+      summary: Get the competences of the course.
+      tags:
+        - "Course"
+        - "Competency"
+      parameters:
+        - $ref: '#/parameters/courseId'
+      responses:
+        200:
+          description: 'Array of Competence with the competences of the course'
+          schema:
+            $ref: "#/definitions/CompetenceArray"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+    post:
+      summary: Assigns a new competence to the course
+      tags:
+        - "Course"
+        - "Competency"
+      consumes:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/courseId'
+        - in: body
+          name: competence
+          description: The competence to Add
+          schema:
+            $ref: "#/definitions/Competence"
+      responses:
+        200:
+          description: 'The competence has been assigned to the course'
+        400:
+          $ref: '#/responses/BadRequest'
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+  /subjects/{courseId}/competences/{competenceId}:
+    delete:
+      summary: Deassigns the competence from the course
+      tags:
+        - "Course"
+        - "Competency"
+      parameters:
+        - $ref: '#/parameters/courseId'
+        - in: path
+          name: competenceId
+          type: string
+          required: true
+          description: The Competence identifier
+      responses:
+        200:
+          description: 'The competence has been deassigned from the course'
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+  /subjects/{courseId}/activities/{activityId}/competences:
+    get:
+      summary: Get the competences of the activity.
+      tags:
+        - "Course"
+        - "Competency"
+        - "Activity"
+      parameters:
+        - $ref: '#/parameters/courseId'
+        - $ref: '#/parameters/activityId'
+      responses:
+        200:
+          description: 'Array of Competence with the competences of the activity'
+          schema:
+            $ref: "#/definitions/CompetenceArray"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+    post:
+      summary: Assigns a new competence to the activity
+      tags:
+        - "Course"
+        - "Competency"
+        - "Activity"
+      consumes:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/courseId'
+        - $ref: '#/parameters/activityId'
+        - in: body
+          name: competence
+          description: The competence to Add
+          schema:
+            $ref: "#/definitions/Competence"
+      responses:
+        200:
+          description: 'The competence has been assigned to the activity'
+        400:
+          $ref: '#/responses/BadRequest'
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+  /subjects/{courseId}/activities/{activityId}/competences/{competenceId}:
+    delete:
+      summary: Deassigns the competence from the activity
+      tags:
+        - "Course"
+        - "Competency"
+        - "Activity"
+      parameters:
+        - $ref: '#/parameters/courseId'
+        - $ref: '#/parameters/activityId'
+        - in: path
+          name: competenceId
+          type: string
+          required: true
+          description: The Competence identifier
+      responses:
+        200:
+          description: 'The competence has been deassigned from the activity'
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'        
+  /grades:
+    get:
+      summary: Get the grades of the course
+      tags:
+        - "Assessment"
+      responses:
+        200:
+          description: 'Array of grades of all enrolled courses'
+          schema:
+            $ref: "#/definitions/CourseGradeArray"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+  /courses/{courseOfferingId}/grades:
+    get:
+      summary: Get the grades of all the students of the course
+      tags:
+        - "Course"
+        - "Assessment"
+      parameters:
+        - $ref: '#/parameters/courseOfferingId'
+      responses:
+        200:
+          description: 'Array of grades of all the students of the course'
+          schema:
+            $ref: "#/definitions/ParticipantGradeArray"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+    post:
+      summary: Set the grade of a student in the course
+      tags:
+        - "Course"
+        - "Assessment"
+      parameters:
+        - $ref: '#/parameters/courseOfferingId'
+        - in: body
+          name: course grade
+          description: The grade of the course
+          schema:
+            $ref: "#/definitions/CourseGrade"
+      responses:
+        200:
+          description: 'The grade has been set successfully'
+          schema:
+            $ref: "#/definitions/CourseGrade"
+        400:
+          $ref: '#/responses/BadRequest'
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+  /courses/{courseOfferingId}/grades/{participantId}:
+    get:
+      summary: Get the grades of the student in the course
+      tags:
+        - "Course"
+        - "Assessment"
+      parameters:
+        - $ref: '#/parameters/courseOfferingId'
+        - $ref: '#/parameters/participantId'
+      responses:
+        200:
+          description: 'Grade of the student in the course'
+          schema:
+            $ref: "#/definitions/CourseGrade"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+    put:
+      summary: Sets the grade of the student in the course
+      tags:
+        - "Course"
+        - "Assessment"
+      parameters:
+        - $ref: '#/parameters/courseOfferingId'
+        - $ref: '#/parameters/participantId'
+        - in: body
+          name: course grade
+          description: The grade of the course
+          schema:
+            $ref: "#/definitions/CourseGrade"
+      responses:
+        200:
+          description: 'The grade has been set successfully'
+          schema:
+            $ref: "#/definitions/CourseGrade"
+        400:
+          $ref: '#/responses/BadRequest'
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+    delete:
+      summary: Removes a grade of a student from the course
+      tags:
+        - "Course"
+        - "Assessment"
+      parameters:
+        - $ref: '#/parameters/courseOfferingId'
+        - $ref: '#/parameters/participantId'
+      responses:
+        200:
+          description: 'The grade of the student was removed from the course'
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'  
+  /courses/{courseOfferingId}/activities/{activityId}/grades:
+    get:
+      summary: Get the grades of all the students in the activity
+      tags:
+        - "Course"
+        - "Activity"
+        - "Assessment"
+      parameters:
+        - $ref: '#/parameters/courseOfferingId'
+        - $ref: '#/parameters/activityId'
+      responses:
+        200:
+          description: 'Array of grades of all the students in the activity'
+          schema:
+            $ref: "#/definitions/ParticipantActivityGradeArray"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+    post:
+      summary: Sets the grade of the activity for a student
+      tags:
+        - "Course"
+        - "Activity"
+        - "Assessment"
+      parameters:
+        - $ref: '#/parameters/courseOfferingId'
+        - $ref: '#/parameters/activityId'
+        - in: body
+          name: activity grade
+          description: The grade of the activity
+          schema:
+            $ref: "#/definitions/ActivityGrade"
+      responses:
+        200:
+          description: 'The grade has been set successfully'
+          schema:
+            $ref: "#/definitions/ActivityGrade"
+        400:
+          $ref: '#/responses/BadRequest'
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+  /courses/{courseOfferingId}/activities/{activityId}/grades/{participantId}:
+    get:
+      summary: Get the grades of the student in the activity
+      tags:
+        - "Course"
+        - "Activity"
+        - "Assessment"
+      parameters:
+        - $ref: '#/parameters/courseOfferingId'
+        - $ref: '#/parameters/activityId'
+        - $ref: '#/parameters/participantId'
+      responses:
+        200:
+          description: 'Grade of the student in the activity'
+          schema:
+            $ref: "#/definitions/ActivityGrade"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+    put:
+      summary: Sets the grade of the student in the activity
+      tags:
+        - "Course"
+        - "Activity"
+        - "Assessment"
+      parameters:
+        - $ref: '#/parameters/courseOfferingId'
+        - $ref: '#/parameters/activityId'
+        - $ref: '#/parameters/participantId'
+        - in: body
+          name: activity grade
+          description: The grade of the activity
+          schema:
+            $ref: "#/definitions/ActivityGrade"
+      responses:
+        200:
+          description: 'The grade has been set successfully'
+          schema:
+            $ref: "#/definitions/ActivityGrade"
+        400:
+          $ref: '#/responses/BadRequest'
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+    delete:
+      summary: Removes a grade of a student from the activity
+      tags:
+        - "Course"
+        - "Activity"
+        - "Assessment"
+      parameters:
+        - $ref: '#/parameters/courseOfferingId'
+        - $ref: '#/parameters/activityId'
+        - $ref: '#/parameters/participantId'
+      responses:
+        200:
+          description: 'The grade of the student was removed from the activity'
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+  /event/boards:
+    get:
+      summary: Get all the event boards where you are subscribed.
+      tags:
+        - "Event"
+      responses:
+        200:
+          description: 'Array of event boards where you are subscribed'
+          schema:
+            $ref: "#/definitions/EventBoardArray"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+  /event/boards/{eventBoardId}/events:
+    get:
+      summary: Get the events of the Board.
+      tags:
+        - "Event"
+      parameters:
+        - $ref: '#/parameters/eventBoardId'
+      responses:
+        200:
+          description: 'Array of events of the Board'
+          schema:
+            $ref: "#/definitions/EventArray"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+    post:
+      summary: Add event to the board
+      tags:
+        - "Event"
+      consumes:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/eventBoardId'
+        - in: body
+          name: event
+          description: The event to Add
+          schema:
+            $ref: "#/definitions/Event"
+      responses:
+        200:
+          description: 'The Event has been added to the event board'
+        400:
+          $ref: '#/responses/BadRequest'
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
+  /event/boards/{eventBoardId}/events/{eventBoardStartDate}/{eventBoardEndDate}:
+    get:
+      summary: Get the events of the Board.
+      tags:
+        - "Event"
+      parameters:
+        - $ref: '#/parameters/eventBoardId'
+        - $ref: '#/parameters/eventBoardStartDate'
+        - $ref: '#/parameters/eventBoardEndDate'
+      responses:
+        200:
+          description: 'Array of events of the Board'
+          schema:
+            $ref: "#/definitions/EventArray"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        default:
+          $ref: '#/responses/Error'
