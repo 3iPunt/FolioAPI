@@ -72,12 +72,6 @@ parameters:
     description: "ID of the course"
     required: true
     type: "string"
-  courseOfferingId:
-    name: courseOfferingId
-    in: path
-    description: "ID of the course"
-    required: true
-    type: "string"
   courseId:
     name: courseId
     in: path
@@ -602,7 +596,7 @@ paths:
           $ref: '#/responses/NotFound'
         500:
          $ref: '#/responses/Error'
-  /users/{searchString}:
+  /usersSearch/{searchString}:
     get:
       summary: Gets the list of users that match with the search
       tags:
@@ -869,14 +863,14 @@ paths:
           $ref: '#/responses/NotFound'
         500:
           $ref: '#/responses/Error'
-  /courses/{courseOfferingId}/students:
+  /courses/{courseId}/students:
     get:
       summary: Get the students of the course.
       tags:
         - "Course"
         - "Participants"
       parameters:
-        - $ref: '#/parameters/courseOfferingId'
+        - $ref: '#/parameters/courseId'
       responses:
         200:
           description: 'Array of Participant with the participants of the course assigned to it as `mc3.participant.student`'
@@ -894,7 +888,7 @@ paths:
         - "Course"
         - "Participants"
       parameters:
-        - $ref: '#/parameters/courseOfferingId'
+        - $ref: '#/parameters/courseId'
         - in: body
           name: participant id
           description: The participant id to add
@@ -912,14 +906,14 @@ paths:
           $ref: '#/responses/NotFound'
         500:
           $ref: '#/responses/Error'
-  /courses/{courseOfferingId}/students/{participantId}:
+  /courses/{courseId}/students/{participantId}:
     delete:
       summary: Removes a student from the course
       tags:
         - "Course"
         - "Participants"
       parameters:
-        - $ref: '#/parameters/courseOfferingId'
+        - $ref: '#/parameters/courseId'
         - $ref: '#/parameters/participantId'
       responses:
         200:
@@ -991,14 +985,14 @@ paths:
           $ref: '#/responses/NotFound'
         500:
           $ref: '#/responses/Error'
-  /courses/{courseOfferingId}/instructors:
+  /courses/{courseId}/instructors:
     get:
       summary: Get the instructors of the course.
       tags:
         - "Course"
         - "Participants"
       parameters:
-        - $ref: '#/parameters/courseOfferingId'
+        - $ref: '#/parameters/courseId'
       responses:
         200:
           description: 'Array of Participant with the instructors of the course assigned to it as `mc3.participant.instructor`'
@@ -1016,7 +1010,7 @@ paths:
         - "Course"
         - "Participants"
       parameters:
-        - $ref: '#/parameters/courseOfferingId'
+        - $ref: '#/parameters/courseId'
         - in: body
           name: participant id
           description: The participant id to add
@@ -1034,14 +1028,14 @@ paths:
           $ref: '#/responses/NotFound'
         500:
           $ref: '#/responses/Error'
-  /courses/{courseOfferingId}/instructors/{participantId}:
+  /courses/{courseId}/instructors/{participantId}:
     delete:
       summary: Removes a instructor from the course
       tags:
         - "Course"
         - "Participants"
       parameters:
-        - $ref: '#/parameters/courseOfferingId'
+        - $ref: '#/parameters/courseId'
         - $ref: '#/parameters/participantId'
       responses:
         200:
@@ -1286,14 +1280,14 @@ paths:
           $ref: '#/responses/NotFound'
         500:
           $ref: '#/responses/Error'
-  /courses/{courseOfferingId}/grades:
+  /courses/{courseId}/grades:
     get:
       summary: Get the grades of all the students of the course
       tags:
         - "Course"
         - "Assessment"
       parameters:
-        - $ref: '#/parameters/courseOfferingId'
+        - $ref: '#/parameters/courseId'
       responses:
         200:
           description: 'Array of grades of all the students of the course'
@@ -1311,7 +1305,7 @@ paths:
         - "Course"
         - "Assessment"
       parameters:
-        - $ref: '#/parameters/courseOfferingId'
+        - $ref: '#/parameters/courseId'
         - in: body
           name: course grade
           description: The grade of the course
@@ -1330,14 +1324,14 @@ paths:
           $ref: '#/responses/NotFound'
         500:
           $ref: '#/responses/Error'
-  /courses/{courseOfferingId}/grades/{participantId}:
+  /courses/{courseId}/grades/{participantId}:
     get:
       summary: Get the grades of the student in the course
       tags:
         - "Course"
         - "Assessment"
       parameters:
-        - $ref: '#/parameters/courseOfferingId'
+        - $ref: '#/parameters/courseId'
         - $ref: '#/parameters/participantId'
       responses:
         200:
@@ -1356,7 +1350,7 @@ paths:
         - "Course"
         - "Assessment"
       parameters:
-        - $ref: '#/parameters/courseOfferingId'
+        - $ref: '#/parameters/courseId'
         - $ref: '#/parameters/participantId'
         - in: body
           name: course grade
@@ -1382,7 +1376,7 @@ paths:
         - "Course"
         - "Assessment"
       parameters:
-        - $ref: '#/parameters/courseOfferingId'
+        - $ref: '#/parameters/courseId'
         - $ref: '#/parameters/participantId'
       responses:
         200:
@@ -1393,7 +1387,7 @@ paths:
           $ref: '#/responses/NotFound'
         500:
           $ref: '#/responses/Error'  
-  /courses/{courseOfferingId}/activities/{activityId}/grades:
+  /courses/{courseId}/activities/{activityId}/grades:
     get:
       summary: Get the grades of all the students in the activity
       tags:
@@ -1401,7 +1395,7 @@ paths:
         - "Activity"
         - "Assessment"
       parameters:
-        - $ref: '#/parameters/courseOfferingId'
+        - $ref: '#/parameters/courseId'
         - $ref: '#/parameters/activityId'
       responses:
         200:
@@ -1421,7 +1415,7 @@ paths:
         - "Activity"
         - "Assessment"
       parameters:
-        - $ref: '#/parameters/courseOfferingId'
+        - $ref: '#/parameters/courseId'
         - $ref: '#/parameters/activityId'
         - in: body
           name: activity grade
@@ -1441,7 +1435,7 @@ paths:
           $ref: '#/responses/NotFound'
         500:
           $ref: '#/responses/Error'
-  /courses/{courseOfferingId}/activities/{activityId}/grades/{participantId}:
+  /courses/{courseId}/activities/{activityId}/grades/{participantId}:
     get:
       summary: Get the grades of the student in the activity
       tags:
@@ -1449,7 +1443,7 @@ paths:
         - "Activity"
         - "Assessment"
       parameters:
-        - $ref: '#/parameters/courseOfferingId'
+        - $ref: '#/parameters/courseId'
         - $ref: '#/parameters/activityId'
         - $ref: '#/parameters/participantId'
       responses:
@@ -1470,7 +1464,7 @@ paths:
         - "Activity"
         - "Assessment"
       parameters:
-        - $ref: '#/parameters/courseOfferingId'
+        - $ref: '#/parameters/courseId'
         - $ref: '#/parameters/activityId'
         - $ref: '#/parameters/participantId'
         - in: body
@@ -1498,7 +1492,7 @@ paths:
         - "Activity"
         - "Assessment"
       parameters:
-        - $ref: '#/parameters/courseOfferingId'
+        - $ref: '#/parameters/courseId'
         - $ref: '#/parameters/activityId'
         - $ref: '#/parameters/participantId'
       responses:
