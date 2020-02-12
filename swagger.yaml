@@ -404,7 +404,7 @@ paths:
                 faculty_id: 602643
         401:
           $ref: '#/responses/Unauthorized'
-        default:
+        500:
           $ref: '#/responses/Error'
   /faculties/{facultyId}:
     get:
@@ -423,7 +423,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
          $ref: '#/responses/Error'
   /faculties/{facultyId}/competences:
     get:
@@ -442,7 +442,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
          $ref: '#/responses/Error'
   /faculties/{facultyId}/programs:
     get:
@@ -461,7 +461,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
   /faculties/{facultyId}/programs/{programId}:
     get:
@@ -481,7 +481,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
          $ref: '#/responses/Error'
   /faculties/{facultyId}/programs/{programId}/competences:
     get:
@@ -501,7 +501,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
          $ref: '#/responses/Error'
   /faculties/{facultyId}/programs/{programId}/subjects:
     get:
@@ -526,7 +526,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'       
   /programs:
     get:
@@ -541,7 +541,7 @@ paths:
             $ref: "#/definitions/ProgramArray"
         401:
           $ref: '#/responses/Unauthorized'
-        default:
+        500:
           $ref: '#/responses/Error'
   /programs/{programId}/roles:
     get:
@@ -562,7 +562,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'       
   /users/{userName}:
     get:
@@ -581,7 +581,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
          $ref: '#/responses/Error'
   /users/{userName}/profile:
     get:
@@ -600,7 +600,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
          $ref: '#/responses/Error'
   /users/{searchString}:
     get:
@@ -619,7 +619,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'       
   /courses:
     get:
@@ -639,7 +639,7 @@ paths:
                 subject_id: 602643
         401:
           $ref: '#/responses/Unauthorized'
-        default:
+        500:
           $ref: '#/responses/Error'
     post:
       summary: Creates a new course in the system
@@ -660,7 +660,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
   /courses/{courseId}:
     get:
@@ -678,7 +678,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
          $ref: '#/responses/Error'
     put:
       summary: Updates a course
@@ -704,7 +704,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
   /subjects/{courseId}/activities:
     get:
@@ -723,7 +723,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
     post:
       summary: Creates an activity inside the Course
@@ -750,7 +750,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
   /subjects/{courseId}/activities/{activityId}:
     get:
@@ -770,7 +770,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
     put:
       summary: Updates an activity
@@ -798,7 +798,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
   /courses/{courseId}/participants:
     get:
@@ -817,7 +817,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
     post:
       summary: Add new participant to the course
@@ -849,7 +849,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
   /courses/{courseId}/participants/{participantId}:
     delete:
@@ -867,7 +867,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
   /courses/{courseOfferingId}/students:
     get:
@@ -886,7 +886,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
     post:
       summary: Add a new student to the course
@@ -910,7 +910,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
   /courses/{courseOfferingId}/students/{participantId}:
     delete:
@@ -928,7 +928,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
   /subjects/{courseId}/coordinators:
     get:
@@ -947,7 +947,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
     post:
       summary: Add a teacher to the course
@@ -971,7 +971,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
   /subjects/{courseId}/coordinators/{participantId}:
     delete:
@@ -989,7 +989,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
   /courses/{courseOfferingId}/instructors:
     get:
@@ -1008,7 +1008,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
     post:
       summary: Add a instructor to the course
@@ -1032,7 +1032,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
   /courses/{courseOfferingId}/instructors/{participantId}:
     delete:
@@ -1050,7 +1050,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
   /courses/{courseId}/staff:
     get:
@@ -1069,7 +1069,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
     post:
       summary: Add a new staff to the course
@@ -1093,7 +1093,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
   /courses/{courseId}/staff/{participantId}:
     delete:
@@ -1111,7 +1111,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
 
   /competences:
@@ -1130,7 +1130,7 @@ paths:
                 program_id: 602643
         401:
           $ref: '#/responses/Unauthorized'
-        default:
+        500:
           $ref: '#/responses/Error'
   /subjects/{courseId}/competences:
     get:
@@ -1149,7 +1149,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
     post:
       summary: Assigns a new competence to the course
@@ -1174,7 +1174,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
   /subjects/{courseId}/competences/{competenceId}:
     delete:
@@ -1196,7 +1196,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
   /subjects/{courseId}/activities/{activityId}/competences:
     get:
@@ -1217,7 +1217,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
     post:
       summary: Assigns a new competence to the activity
@@ -1244,7 +1244,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
   /subjects/{courseId}/activities/{activityId}/competences/{competenceId}:
     delete:
@@ -1268,7 +1268,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'        
   /grades:
     get:
@@ -1284,7 +1284,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
   /courses/{courseOfferingId}/grades:
     get:
@@ -1303,7 +1303,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
     post:
       summary: Set the grade of a student in the course
@@ -1328,7 +1328,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
   /courses/{courseOfferingId}/grades/{participantId}:
     get:
@@ -1348,7 +1348,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
     put:
       summary: Sets the grade of the student in the course
@@ -1374,7 +1374,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
     delete:
       summary: Removes a grade of a student from the course
@@ -1391,7 +1391,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'  
   /courses/{courseOfferingId}/activities/{activityId}/grades:
     get:
@@ -1412,7 +1412,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
     post:
       summary: Sets the grade of the activity for a student
@@ -1439,7 +1439,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
   /courses/{courseOfferingId}/activities/{activityId}/grades/{participantId}:
     get:
@@ -1461,7 +1461,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
     put:
       summary: Sets the grade of the student in the activity
@@ -1489,7 +1489,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
     delete:
       summary: Removes a grade of a student from the activity
@@ -1508,7 +1508,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
   /event/boards:
     get:
@@ -1524,7 +1524,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
   /event/boards/{eventBoardId}/events:
     get:
@@ -1542,7 +1542,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
     post:
       summary: Add event to the board
@@ -1566,7 +1566,7 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
   /event/boards/{eventBoardId}/events/{eventBoardStartDate}/{eventBoardEndDate}:
     get:
@@ -1586,5 +1586,5 @@ paths:
           $ref: '#/responses/Unauthorized'
         404:
           $ref: '#/responses/NotFound'
-        default:
+        500:
           $ref: '#/responses/Error'
