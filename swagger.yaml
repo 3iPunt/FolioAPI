@@ -15,6 +15,8 @@ consumes:
 produces:
 - application/json
 tags:
+  - name: "Institution"
+    description: "The instution that defines the university or school or enterprise"
   - name: "Campus"
     description: "The community and the online offerings of university"
   - name: "Program"
@@ -41,7 +43,15 @@ tags:
     description: "Assessment refers to how is graded an activity and the whole course"
   - name: "Event"
     description: "An Event is range of time associated with a Location and event sponsors. Used here to manage notifications and calendars"
+  - name: "Folio"
+    description: "Information about Folio interactions"
 parameters:
+  institutionId:
+    name: institutionId
+    in: path
+    description: "ID of the Intitution"
+    required: true
+    type: "string"
   facultyId:
     name: facultyId
     in: path
@@ -115,6 +125,25 @@ parameters:
     required: true
     type: "string"
 definitions:
+  Institution:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The institution identifier
+        example: 'mc3.learning.instituion.UOC'
+      displayName:
+        type: string
+        description: The Instutition title
+        example: Universitat Oberta de Catalunya
+      type:
+        type: string
+        description: The Instutition type
+        example: University
+  InstitutionArray:
+    type: array
+    items:
+      $ref: "#/definitions/Institution"  
   Faculty:
     type: object
     properties:
@@ -130,6 +159,10 @@ definitions:
         type: string
         description: The Faculty title
         example: Estudis d'informàtica, Multimèdia i Telecomunicacions
+  FacultyArray:
+    type: array
+    items:
+      $ref: "#/definitions/Faculty"  
   Program:
     type: object
     properties:
@@ -364,6 +397,76 @@ definitions:
     type: array
     items:
       $ref: "#/definitions/Event"  
+  MyFolio:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The user identifier
+        example: 'mc3.agent:130360@uoc.edu'
+      userName:
+        type: string
+        description: the user name Id
+        example: 'johndoe'
+      totalAgora:
+        type: integer
+        description: The total number of agoras
+        example: 14
+      totalPost:
+        type: integer
+        description: The total number of posts
+        example: 140        
+      totalPendingReadPost:
+        type: integer
+        description: The total number of pending read posts
+        example: 45        
+      totalAgoraCurrentSemester:
+        type: integer
+        description: The total number currnt semester agoras 
+        example: 4
+      totalPostCurrentSemester:
+        type: integer
+        description: The total number of posts of current semester
+        example: 140        
+      totalPendingReadPostCurrentSemester:
+        type: integer
+        description: The total number of pending read posts of current semester
+        example: 45        
+  Agora:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The Agora identifier related with a course
+        example: 'mc3.learning.course:602644@uoc.edu'
+      code:
+        type: string
+        description: The Agora identifier, one for course
+        example: '192_05_555_01'
+      title:
+        type: string
+        description: the Agora Title
+        example: 'Maths 2019-2'
+      term:
+        type: string
+        description: the Agora semester or term
+        example: '20192'
+      totalPost:
+        type: integer
+        description: The total number of posts
+        example: 140        
+      totalComments:
+        type: integer
+        description: The total number of comments
+        example: 256        
+      totalStudents:
+        type: integer
+        description: The total number of students
+        example: 76        
+  AgoraArray:
+    type: array
+    items:
+      $ref: "#/definitions/Agora"  
 responses:
   NotFound:
     description: The specified resource (or one of its parent resources) was not found
@@ -382,6 +485,65 @@ responses:
     schema:
       $ref: '#/definitions/Error'
 paths:
+  /institutions:
+    get:
+      summary: List my instutitions (most common is one)
+      tags:
+        - "Institutions"
+      responses:
+        200:
+          description: 'List of all instutitions involved'
+          schema:
+            $ref: "#/definitions/InstitutionArray"
+          examples:
+            application/json:
+              - title: "Estudis d'Informàtica Multimèdia i Telecomunicacions (EIMT)"
+                id: 602644
+                code: 'uoc_EIMT'
+                faculty_id: 602643
+        401:
+          $ref: '#/responses/Unauthorized'
+        500:
+          $ref: '#/responses/Error'
+  /institutions/{institutionId}:
+    get:
+      summary: Get a faculty
+      tags:
+        - "Campus"
+        - "Institutions"
+      parameters:
+        - $ref: '#/parameters/institutionId'
+      responses:
+        200:
+          description: 'a Institution object with the Institution data'
+          schema:
+            $ref: "#/definitions/Institution"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        500:
+         $ref: '#/responses/Error'
+  /institutions/{institutionId}/faculties:
+    get:
+      summary: Get the faculties of a institution
+      tags:
+        - "Campus"
+        - "Program"
+      parameters:
+        - $ref: '#/parameters/institutionId'
+      responses:
+        200:
+          description: 'Array of Faculties with the Facultiy of the Institution'
+          schema:
+            $ref: "#/definitions/FacultyArray"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        500:
+         $ref: '#/responses/Error'
+
   /faculties:
     get:
       summary: List my faculties (most common is one)
@@ -389,7 +551,9 @@ paths:
         - "Campus"
       responses:
         200:
-          description: 'List of all faculties involved'
+          description: 'a Faculty object with the Faculty data'
+          schema:
+            $ref: "#/definitions/FacultyArray"
           examples:
             application/json:
               - title: "Estudis d'Informàtica Multimèdia i Telecomunicacions (EIMT)"
@@ -1576,6 +1740,54 @@ paths:
           description: 'Array of events of the Board'
           schema:
             $ref: "#/definitions/EventArray"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        500:
+          $ref: '#/responses/Error'
+  /folio/my:
+    get:
+      summary: Get the summary of my folios
+      tags:
+        - "Folio"
+      responses:
+        200:
+          description: 'Summarized data of my folio status'
+          schema:
+            $ref: "#/definitions/MyFolio"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        500:
+          $ref: '#/responses/Error'          
+  /folio/my/agora:
+    get:
+      summary: Get all my agoras from current semester
+      tags:
+        - "Folio"
+      responses:
+        200:
+          description: 'Get all active agoras, from current semester'
+          schema:
+            $ref: "#/definitions/AgoraArray"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        500:
+          $ref: '#/responses/Error'                    
+  /folio/my/agora/history:
+    get:
+      summary: Get all my agoras from all terms or semester
+      tags:
+        - "Folio"
+      responses:
+        200:
+          description: 'Get all active agoras, from all semesters'
+          schema:
+            $ref: "#/definitions/AgoraArray"
         401:
           $ref: '#/responses/Unauthorized'
         404:
