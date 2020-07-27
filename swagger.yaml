@@ -543,7 +543,7 @@ paths:
           $ref: '#/responses/Error'
   /institutions/{institutionId}:
     get:
-      summary: Get a faculty
+      summary: Get an institution
       tags:
         - "Campus"
         - "Institutions"
