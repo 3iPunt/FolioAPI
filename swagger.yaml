@@ -416,7 +416,7 @@ definitions:
         type: integer
         description: The total number of posts
         example: 140        
-      totalPendingReadPost:
+      totalUnReadPost:
         type: integer
         description: The total number of pending read posts
         example: 45        
@@ -431,7 +431,16 @@ definitions:
       totalPendingReadPostCurrentSemester:
         type: integer
         description: The total number of pending read posts of current semester
-        example: 45        
+        example: 45   
+      url:
+        type: string
+        description: The public url
+        example: 'http://user.folio.edu'
+      urlAddNew:
+        type: string
+        description: The public url to add new post
+        example: 'http://user.folio.edu/wp-admin/post-new.php'
+        
   Agora:
     type: object
     properties:
@@ -451,14 +460,26 @@ definitions:
         type: string
         description: the Agora semester or term
         example: '20192'
+      url:
+        type: string
+        description: The public url
+        example: 'http://agoracode.uoc.folio.edu'
       totalPost:
         type: integer
         description: The total number of posts
         example: 140        
+      totalUnReadPost:
+        type: integer
+        description: The total number of pending read posts
+        example: 45        
       totalComments:
         type: integer
         description: The total number of comments
         example: 256        
+      totalUnReadComments:
+        type: integer
+        description: The total number of pending read comments
+        example: 45        
       totalStudents:
         type: integer
         description: The total number of students
@@ -467,6 +488,21 @@ definitions:
     type: array
     items:
       $ref: "#/definitions/Agora"  
+  ParticipantFolio:
+    description: Participant Folio information
+    type: object
+    properties:
+      participant:
+        description: The Participant information
+        $ref: '#/definitions/Error'
+      url:
+        type: string
+        description: The Participant Folio url
+        example: https://username.folio.edu
+  ParticipantFolioArray:
+    type: array
+    items:
+      $ref: "#/definitions/ParticipantFolio"  
 responses:
   NotFound:
     description: The specified resource (or one of its parent resources) was not found
@@ -1772,6 +1808,42 @@ paths:
           description: 'Get all active agoras, from current semester'
           schema:
             $ref: "#/definitions/AgoraArray"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        500:
+          $ref: '#/responses/Error'                    
+  /folio/my/agora/{courseId}:
+    get:
+      summary: Get data of current agora
+      tags:
+        - "Folio"
+      parameters:
+        - $ref: '#/parameters/courseId'
+      responses:
+        200:
+          description: 'Get Information of current agora'
+          schema:
+            $ref: "#/definitions/Agora"
+        401:
+          $ref: '#/responses/Unauthorized'
+        404:
+          $ref: '#/responses/NotFound'
+        500:
+          $ref: '#/responses/Error'                    
+  /folio/my/agora/{courseId}/participants:
+    get:
+      summary: Get data list of participants agora
+      tags:
+        - "Folio"
+      parameters:
+        - $ref: '#/parameters/courseId'
+      responses:
+        200:
+          description: 'Get Information of agora participants'
+          schema:
+            $ref: "#/definitions/ParticipantFolioArray"
         401:
           $ref: '#/responses/Unauthorized'
         404:
