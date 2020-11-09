@@ -500,9 +500,18 @@ definitions:
     description: Participant Folio information
     type: object
     properties:
-      participant:
-        description: The Participant information
-        $ref: '#/definitions/Error'
+      id:
+        type: string
+        description: The user identifier
+        example: 'mc3.agent:130360@uoc.edu'
+      userName:
+        type: string
+        description: the user name Id
+        example: 'johndoe'
+      displayName:
+        type: string
+        description: the user full name
+        example: 'John Doe'
       url:
         type: string
         description: The Participant Folio url
