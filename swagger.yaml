@@ -436,10 +436,18 @@ definitions:
         type: string
         description: The public url
         example: 'http://user.folio.edu'
-      urlAddNew:
+      urlAddNew: 
         type: string
         description: The public url to add new post
         example: 'http://user.folio.edu/wp-admin/post-new.php'
+      urlManage: 
+        type: string
+        description: The public url to manage Folio
+        example: 'http://user.folio.edu/wp-admin/'
+      headerImage:
+        type: string
+        description: The header image url, can be null
+        example: 'http://user.folio.edu/myAwesomeImage.jpg'
         
   Agora:
     type: object
