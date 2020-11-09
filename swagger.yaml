@@ -508,7 +508,7 @@ definitions:
         type: string
         description: the user name Id
         example: 'johndoe'
-      displayName:
+      displayName: 
         type: string
         description: the user full name
         example: 'John Doe'
@@ -516,6 +516,10 @@ definitions:
         type: string
         description: The Participant Folio url
         example: https://username.folio.edu
+      numberPost: 
+        type: number
+        description: The number of posts created by this participant
+        example: 7
   ParticipantFolioArray:
     type: array
     items:
