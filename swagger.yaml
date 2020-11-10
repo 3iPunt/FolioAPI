@@ -420,6 +420,14 @@ definitions:
         type: integer
         description: The total number of pending read posts
         example: 45        
+      totalComment:
+        type: integer
+        description: The total number of comments
+        example: 140        
+      totalUnReadComment:
+        type: integer
+        description: The total number of pending read comments
+        example: 45        
       totalAgoraCurrentSemester:
         type: integer
         description: The total number currnt semester agoras 
@@ -431,6 +439,14 @@ definitions:
       totalPendingReadPostCurrentSemester:
         type: integer
         description: The total number of pending read posts of current semester
+        example: 45   
+      totalCommentCurrentSemester:
+        type: integer
+        description: The total number of comments of current semester
+        example: 140        
+      totalPendingReadCommentCurrentSemester:
+        type: integer
+        description: The total number of pending read comments of current semester
         example: 45   
       url:
         type: string
