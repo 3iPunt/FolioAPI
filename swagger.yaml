@@ -124,6 +124,12 @@ parameters:
     description: "ID of the event"
     required: true
     type: "string"
+  email:
+    name: email
+    in: query
+    required: true
+    type: "string"
+    description: The user email to get information from
 definitions:
   Institution:
     type: object
@@ -1822,6 +1828,8 @@ paths:
   /folio/my:
     get:
       summary: Get the summary of my folios
+      parameters:
+        - $ref: '#/parameters/email'
       tags:
         - "Folio"
       responses:
@@ -1838,6 +1846,8 @@ paths:
   /folio/my/agora:
     get:
       summary: Get all my agoras from current semester
+      parameters:
+        - $ref: '#/parameters/email'
       tags:
         - "Folio"
       responses:
@@ -1858,6 +1868,7 @@ paths:
         - "Folio"
       parameters:
         - $ref: '#/parameters/courseId'
+        - $ref: '#/parameters/email'
       responses:
         200:
           description: 'Get Information of current agora'
@@ -1876,6 +1887,7 @@ paths:
         - "Folio"
       parameters:
         - $ref: '#/parameters/courseId'
+        - $ref: '#/parameters/email'
       responses:
         200:
           description: 'Get Information of agora participants'
@@ -1892,6 +1904,8 @@ paths:
       summary: Get all my agoras from all terms or semester
       tags:
         - "Folio"
+      parameters:
+        - $ref: '#/parameters/email'
       responses:
         200:
           description: 'Get all active agoras, from all semesters'
